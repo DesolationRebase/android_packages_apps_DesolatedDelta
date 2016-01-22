@@ -4,25 +4,25 @@
     <item type="bool" name="debug_output">true</item>
 
     <!-- Property to read for ROM version -->
-    <string name="property_version">ro.eos.version</string>
+    <string name="property_version">deso.ota.version</string>
 
     <!-- Property to read for device identifier -->
-    <string name="property_device">ro.eos.device</string>
+    <string name="property_device">ro.product.name</string>
 
     <!-- %s is expanded to property_version value. .zip, .delta, .update, .sign extensions added when needed -->
-    <string name="filename_base">Euphoria-OS-%s</string>
+    <string name="filename_base">DesolationRom-%s</string>
 
     <!-- Path deltas are stored, relative to sdcard root -->
-    <string name="path_base">OpenDelta</string>
+    <string name="path_base">DesolatedDelta</string>
 
     <!-- URL base to find .delta files, %s is expanded to property_device value. Path is suffixed by (expanded) filename_base -->
-    <string name="url_base_delta">http://fs1.androidfilesharing.com/ota/delta/%s/</string>
+    <string name="url_base_delta">http://desolationrom.com/ota/delta/%s/</string>
 
     <!-- URL base to find .update and .sign files, %s is expanded to property_device value. Path is suffixed by (expanded) filename_base -->
-    <string name="url_base_update">http://fs1.androidfilesharing.com/ota/delta/%s/</string>
+    <string name="url_base_update">http://desolationrom.com/ota/delta/%s/</string>
 
     <!-- URL base to find the full zip files, %s is expanded to property_device value. Path is suffixed by (expanded) filename_base -->
-    <string name="url_base_full">http://fs1.androidfilesharing.com/ota/delta/builds/%s/</string>
+    <string name="url_base_full">http://desolationrom.com/ota/delta/builds/%s/</string>
 
     <!-- Applies whole-file signature delta. Adds one extra delta step. Required if recovery verifies signatures -->
     <item type="bool" name="apply_signature">false</item>
@@ -54,14 +54,14 @@
     </string-array>
 
     <!-- dev-mode additions -->
-    <string name="dev_mode_pw">pa33w0rd</string>
+    <string name="dev_mode_pw">password</string>
 
     <!-- URL base to find .delta files, %s is expanded to property_device value. Path is suffixed by (expanded) filename_base || for dev mode!-->
-    <string name="url_base_delta_dev">http://fs1.androidfilesharing.com/ota/deltadev/%s/</string>
+    <string name="url_base_delta_dev">http://desolationrom.com/ota/deltadev/%s/</string>
 
     <!-- URL base to find .update and .sign files, %s is expanded to property_device value. Path is suffixed by (expanded) filename_base || for dev mode! -->
-    <string name="url_base_update_dev">http://fs1.androidfilesharing.com/ota/deltadev/%s/</string>
+    <string name="url_base_update_dev">http://desolationrom.com/ota/deltadev/%s/</string>
 
     <!-- URL base to find the full zip files, %s is expanded to property_device value. Path is suffixed by (expanded) filename_base -->
-    <string name="url_base_full_dev">http://fs1.androidfilesharing.com/ota/deltadev/%s/</string>
+    <string name="url_base_full_dev">http://desolationrom.com/ota/deltadev/builds/%s/</string>
 </resources>

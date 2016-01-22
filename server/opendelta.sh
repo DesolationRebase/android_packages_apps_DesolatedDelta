@@ -17,15 +17,16 @@ fi
 
 # ------ CONFIGURATION ------
 
-HOME=/home/build
-
+HOME=/root
+cd $HOME
 BIN_JAVA=java
-BIN_MINSIGNAPK=$HOME/delta/minsignapk.jar
-BIN_XDELTA=$HOME/delta/xdelta3
-BIN_ZIPADJUST=$HOME/delta/zipadjust
-
-FILE_MATCH=omni-*.zip
-PATH_CURRENT=$HOME/omni/out/target/product/$DEVICE
+BIN_MINSIGNAPK=$HOME/deltatools/minsignapk.jar
+BIN_XDELTA=xdelta3
+BIN_ZIPADJUST=$HOME/deltatools/zipadjust
+OTA_DIR_DEV=/usr/share/nginx/html/ota/deltadev
+OTA_DIR=/usr/share/nginx/html/ota/delta
+FILE_MATCH=DesolationRom-*.zip
+PATH_CURRENT=$HOME/deso/out/target/product/$DEVICE
 PATH_LAST=$HOME/delta/last/$DEVICE
 
 KEY_X509=$HOME/.keys/platform.x509.pem
@@ -90,8 +91,8 @@ mkdir out
 
 $BIN_ZIPADJUST --decompress $PATH_CURRENT/$FILE_CURRENT work/current.zip
 $BIN_ZIPADJUST --decompress $PATH_LAST/$FILE_LAST work/last.zip
-$BIN_JAVA -Xmx1024m -jar $BIN_MINSIGNAPK $KEY_X509 $KEY_PK8 work/current.zip work/current_signed.zip
-$BIN_JAVA -Xmx1024m -jar $BIN_MINSIGNAPK $KEY_X509 $KEY_PK8 work/last.zip work/last_signed.zip
+$BIN_JAVA -Xmx2048m -jar $BIN_MINSIGNAPK $KEY_X509 $KEY_PK8 work/current.zip work/current_signed.zip
+$BIN_JAVA -Xmx2048m -jar $BIN_MINSIGNAPK $KEY_X509 $KEY_PK8 work/last.zip work/last_signed.zip
 SRC_BUFF=$(nextPowerOf2 $(getFileSize work/current.zip));
 $BIN_XDELTA -B ${SRC_BUFF} -9evfS none -s work/last.zip work/current.zip out/$FILE_LAST_BASE.update
 SRC_BUFF=$(nextPowerOf2 $(getFileSize work/current_signed.zip));
@@ -155,7 +156,12 @@ echo "}" >> $DELTA
 
 mkdir publish >/dev/null 2>/dev/null
 mkdir publish/$DEVICE >/dev/null 2>/dev/null
-cp out/* publish/$DEVICE/.
+if [ -z "$2" ]
+then
+	cp out/* $OTA_DIR/$DEVICE
+else
+	cp out/* $OTA_DIR_DEV/$DEVICE
+fi
 
 rm -rf work
 rm -rf out
@@ -164,4 +170,5 @@ rm -rf $PATH_LAST/*
 mkdir -p $PATH_LAST
 cp $PATH_CURRENT/$FILE_CURRENT $PATH_LAST/$FILE_CURRENT
 
+cd -
 exit 0
