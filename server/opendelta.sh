@@ -158,8 +158,12 @@ mkdir publish >/dev/null 2>/dev/null
 mkdir publish/$DEVICE >/dev/null 2>/dev/null
 if [ -z "$2" ]
 then
+	mkdir -p $OTA_DIR/$DEVICE && mkdir -p $OTA_DIR/builds/$DEVICE
+	cp $PATH_CURRENT/$FILE_CURRENT $OTA_DIR/builds/$DEVICE
 	cp out/* $OTA_DIR/$DEVICE
 else
+	mkdir -p $OTA_DIR_DEV/$DEVICE && mkdir -p $OTA_DIR_DEV/builds/$device
+	cp $PATH_CURRENT/$FILE_CURRENT $OTA_DIR_DEV/builds/$DEVICE
 	cp out/* $OTA_DIR_DEV/$DEVICE
 fi
 
